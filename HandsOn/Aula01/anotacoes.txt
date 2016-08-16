@@ -1,0 +1,94 @@
+Entendimento de APIs Rest
+
+qualquer coisa que vc consegue importar no seu codigo e trabalhar com alguma tarefa
+
+Representational State Trasfer
+Rest API - capturar o ultimo estado do que o server esta executando, estilo arquitetural de aplicacoes web com o objetivo de transferir dados atraves de varios protocolos. (os mais comuns: SOAP e JSON).
+
+SOAP - simple objetct access protocol, protocolo de transferencia de dados seguindo o formato XML, foi bastante utilizado ate a criacao do JSON. Sempre inicia com o XML version, elementos pai e elementos filho. A principal dif p. o JSON, possui varios atributos para uma mesma query, possuindo maior nivel de detalhes.
+
+JSON - basicamente o dicionario. Significa Java Script Object Notation.
+JSlint - ferramenta 
+JSMin - ferramenta que otimiza script removendo linhas desnecessarias para melhorar o desempenho.
+=== json.org === Possui chave de versao.
+
+Metodos (utilizaremos protocolos http)
+Post -coloca / Get -requer/ Put -atualiza / Delete -deleta
+Status 200-OK / 401-NaoAutorizado / 402-Proibido 4bidden / 404-NaoEncontrado PagNaoExiste/ 500-ErroInternoServidor
+
+CRUD:
+Pos     Get     Put     Del
+create retrive update delete
+
+Rest APIs - utilizados para gerenciar recursos dentro de um servidor.
+
+URLs            Metodos     Acoes
+/usuarios/      POST        Criar novo usuario
+/usuarios/      GET         Listar todos os usuarios
+/usuarios/1/    PUT         Atualiza um usuario
+/usuarios/1/    DELETE      Remover um usuario
+/usuarios/1/    GET         Retorna um usuario
+
+Consumindo uma REST APi pelo Navegador
+
+No firefox - RESTClient
+Headers -> Custom Header -> Name: Content-Type Value: application/json
+
+Pasta do HelpDesk - eh uma api Flask para requisicao - faz conexao com bd
+sudo pip install flask flask-sqlalchemy
+
+Depois da instalacao acima, executar o programa run:
+python run.py
+sempre tera conexao com url 0.0.0.0:5000
+
+Depois abrir no firefox a pagina:
+http://localhost:5000/
+http://localhost:5000/usuarios/ - por padrao qdo coloca a URL no navegador, eh efetuado um GET.
+http://localhost:5000/usuarios/6/ - pega um usuario com ID=6.
+    {
+        "email": "mega.man@dexter.com.br",
+        "id": 6,
+        "nome": "Mega Man"
+    }
+
+Dentro do RESTClient:
+http://localhost:5000/usuarios/
+    Status Code: 200 OK
+    Content-Length: 420 (bytes)
+    Content-Type: application/json
+    Date: Mon, 15 Aug 2016 22:52:19 GMT
+    Server: Werkzeug/0.11.3 Python/2.7.9
+
+POST:
+http://localhost:5000/usuarios/ - depois clica em SEND
+    {
+        "email": "alan@dexter.com.br",
+        "nome": "Alan"
+    }
+PUT:
+http://localhost:5000/usuarios/7/ - depois clica em SEND
+    {
+        "email": "alan@hotmail.com.br",
+        "nome": "Alan"
+    }
+DELETE:
+http://localhost:5000/usuarios/7/ - depois clica em SEND
+    {
+        "message": "Usuario deletado com sucesso!"
+    }
+
+Os logs que ficaram no run:
+{u'email': u'alan@dexter.com.br', u'nome': u'Alan'}
+127.0.0.1 - - [15/Aug/2016 19:59:25] "POST /usuarios/ HTTP/1.1" 200 -
+127.0.0.1 - - [15/Aug/2016 20:00:15] "GET /usuarios/ HTTP/1.1" 200 -
+127.0.0.1 - - [15/Aug/2016 20:00:52] "GET /usuarios/ HTTP/1.1" 200 -
+127.0.0.1 - - [15/Aug/2016 20:02:02] "PUT /usuarios/7/ HTTP/1.1" 200 -
+127.0.0.1 - - [15/Aug/2016 20:02:08] "GET /usuarios/ HTTP/1.1" 200 -
+127.0.0.1 - - [15/Aug/2016 20:05:57] "DELETE /usuarios/7/ HTTP/1.1" 200 -
+
+Usar o request no PYTHON:
+sudo pip install request
+sudo pip install pip request --upgrade
+
+
+
