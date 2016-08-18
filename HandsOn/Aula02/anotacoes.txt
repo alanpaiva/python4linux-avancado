@@ -1,0 +1,57 @@
+Flask - Microframework para aplicacoes web em python
+
+Estrutura basica;
+Trabalhar com Requests;
+Dividir em Blueprints;
+
+Flask
+* a aplicacao eh mais segmentada possivel;
+* Netflix, Uber utilizam esse microframework;
+* Framework bottle ( eh o inverso ) um arquivao para fazer o sistema todo;
+* exemplos: controle de rotas, templates, views (interpreta rota e randeriza template)
+* modolos + usados: flask-sqlalchemy(conecta com banco), flask-migrate(gera migrations p. atualizar estrutura bco)
+
+Instalacao
+sudo pip install flask
+sudo pip install flask --upgrade
+
+Criando rodas e views API
+get
+post
+
+Model: (equivalente o modelo do banco de dados)
+O banco de dados pode ser SQL ou NOSql
+* Trabalhar com flask - MongoEngine
+* Entender e modificar a API
+
+Cardinalidade
+No MongoDB faremos atraves de listas:
+Grupos: 
+Nomes:Analistas
+Integrandes: [Alberto,Josias,Lucas]
+
+Documento chamado grupos e subdocumento chamado Integrantes
+
+MongoEngine
+sudo pip install flask-mongoengine
+
+=====================================
+No mongo ============================
+=====================================
+
+forlinux@developer  ~/4521-Python/HelpDesk (master) $ mongo
+MongoDB shell version: 2.4.10
+connecting to: test
+> use dexter-api
+switched to db dexter-api
+> show collections
+system.indexes
+usuarios
+> db.usuarios.find()
+{ "_id" : ObjectId("57b4f61fac35411574b7f48c"), "nome" : "Alan", "email" : "alan@4linux.com.br", "date_cadastro" : ISODate("2016-08-17T20:41:19.061Z") }
+> 
+
+
+
+
+
