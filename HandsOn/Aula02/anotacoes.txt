@@ -49,6 +49,12 @@ system.indexes
 usuarios
 > db.usuarios.find()
 { "_id" : ObjectId("57b4f61fac35411574b7f48c"), "nome" : "Alan", "email" : "alan@4linux.com.br", "date_cadastro" : ISODate("2016-08-17T20:41:19.061Z") }
+
+> db.grupos.find()
+{ "_id" : ObjectId("57b4f853ac354115c29d47c1"), "nome" : "Analistas", "integrantes" : [  "Alan" ] }
+> 
+
+
 > 
 
 

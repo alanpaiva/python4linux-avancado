@@ -1,0 +1,66 @@
+Gitlab
+Aplicacao web para gerenciar repositorios privados.
+
+Introducao;
+Administracao;
+Gerenciamento;
+
+Caracteristicas
+Possui interface web
+Gerenciamento de repositorios Git (wikis,review,atividades)
+Web hooks - dispara alguma acao para comandos via cmd
+Escalavel 25k users em cluster ativo
+
+* Snippets  pedacos de codigos
+* Sign up - permite que outras pessoas se cadastrem no seu gitlab
+
+ID RSA publico
+para criar: forlinux@developer  ~ $ ssh keygen
+para ver qual eh a sua: forlinux@developer  ~ $ cat .ssh/id_rsa.pub 
+
+README.md
+Criar no cmd..
+markdown do github tem todos os codigos.
+https://guides.github.com/features/mastering-markdown/
+
+Todos devem entrar como MASTER - famoso sysadmin
+o resto da cambada ficam em Developer..
+Evitando que o usuario remova os projetos impossibilitando de recover.
+
+Comandos do GIT
+
+Verificar repositorio:
+git remote show
+
+Verificaar a origem
+git remote -v
+
+Add (MASTER) no cml - editar arquivo PS1
+forlinux@developer  ~/meutoentendendonada (master) $ echo $PS1
+\[\033[01;37m\]\u@\h \[\033[01;34m\] \w\[\033[01;32m\]$(parse_git_branch) \[\033[01;34m\]$\[\033[00m\]
+
+Checar historico de commits
+git log
+
+Checar o diferencial:
+git diff
+
+Retorna configuracoes anteriores (sem ter dado o GIT PUSH)
+git reset --hard origin/master
+
+Retorna configuracoes anteriores (se ja efetuou o GIT PUSH)
+git reset --hard origin/master 434c89f6cfdd0a01f5ffb524487e3678e52945f8
+
+Aplicacao de PATH, (atualizacao do ultimo path do server em sua maq, exemplo)
+git cherry-pick 434c89f6cfdd0a01f5ffb524487e3678e52945f8
+
+Adicionando informacoes para o commit anterior (correcao do ultimo commit)
+git commit --amend
+
+Para capturar o Token:
+http://192.168.0.3/profile/account
+
+
+http://www.cloudatcost.com/
+
+
