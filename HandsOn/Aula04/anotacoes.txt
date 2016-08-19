@@ -1,0 +1,147 @@
+http://pt.slideshare.net/GoAtlassian/love-devops-wait-till-you-meet-sre-54653911
+
+=>  Administrando e operando o Dockers
+    Docker - ferramenta p. gerenciar containers
+    lxc (linux) containers / c-groups (isolar os processos dos containers) / ip tables (mapear as portas)
+
+    1- Criar container;
+    2- Gerenciar container;
+    3- Gerenciar volumee;
+
+    Vantagens:
+        Leveza -executa sobre a maquina compartilhando o kernel do SO, utiliza RAM de forma mais eficiente.
+        Seguranca - isola as apps uma das outras, add uma camada de seguranca por app.
+
+=>  Ferramentas:
+    Softwares de log da apache:    
+    server-status/new-relic -> mais usado.
+    heroku - faz deploy de aplicacao e faz monitoramento da mesma (substitui um host de cloud).
+    openshift(RedHat) - faz deploy tambem.
+    atomichost - SO soh para docker. cockpit (monitora consumo container, portas, etc..)
+    rancherOS - p escalar eh mt bom.. facil interatividade. 
+    apache marathon - Tambem funciona bem.
+    coreOs -
+
+=>  Arquitetura
+
+    AP1                 AP2                 AP3
+    Bin/Libs            Bin/Libs            Bin/Libs
+    DOCKER ENGINE       DOCKER ENGINE       DOCKER ENGINE
+    OS                  OS                  OS
+    INFRASTRUCTURE      INFRASTRUCTURE      INFRASTRUCTURE
+
+====================================
+============= Dockers ==============
+====================================
+
+forlinux@developer:~$ ssh forlinux@192.168.0.2
+
+=> Listando todos (ativos)
+forlinux@dockerhost:~$ docker ps
+
+=> Listando todos (ativos e inativos)
+forlinux@dockerhost:~$ docker ps -a
+
+=> Remover
+docker rm -f $( docker ps -a)
+
+=> Criar novo container
+forlinux@dockerhost:~$ docker run -ti ubuntu /bin/bash
+
+=> Para sair:
+CTRL+D
+forlinux@dockerhost:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+forlinux@dockerhost:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+ab3d7fe71bfe        ubuntu              "/bin/bash"         42 seconds ago      Exited (0) 9 seconds ago                       jolly_booth
+
+=> Para voltar o docker que parou acima:
+forlinux@dockerhost:~$ docker start ab3d7fe71bfe
+ab3d7fe71bfe
+forlinux@dockerhost:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+ab3d7fe71bfe        ubuntu              "/bin/bash"         2 minutes ago       Up 3 seconds                            jolly_booth
+
+=> Sempre executara os comandos usados na criacao
+forlinux@dockerhost:~$ docker attach ab3d7fe71bfe
+root@ab3d7fe71bfe:/# 
+
+=> Para descobrir qual versionLinux que vc esta usando (ubunto, fedora, etc..)
+limpar o cache primeiro: root@ab3d7fe71bfe:/# apt-get clean
+efetuar instalacao:      root@ab3d7fe71bfe:/# apt-get update && apt-get install -y lsb-release
+depois rodar o comando:  root@ab3d7fe71bfe:/# lsb_release
+
+=> Para executar um outro comando diferente do momento que criou o container:
+root@ab3d7fe71bfe:/# docker exec -ti (codigo container) /bin/bash
+
+=> prova que esta usando o mesmo kernel:
+root@ab3d7fe71bfe:/# uname -a (vai aparecer o debian..)
+
+=> apagar container
+docker stop (nome container)
+docker rm (nome container)
+forlinux@dockerhost:~$ docker stop ab3d7fe71bfe
+ab3d7fe71bfe
+forlinux@dockerhost:~$ docker rm  ab3d7fe71bfe
+ab3d7fe71bfe
+forlinux@dockerhost:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+forlinux@dockerhost:~$ 
+
+=> cria o container e deixa em background
+forlinux@dockerhost:~$ docker run -dti --name web1 --hostname web1 ubuntu /bin/bash
+
+9617fddcf85c627d355258aa5d29074b96052c43420ed25f7896044bcbaac07d
+forlinux@dockerhost:~$ 
+
+=> criou o container:
+forlinux@dockerhost:~$ docker exec -ti web1 /bin/bash
+root@web1:/# 
+
+=> criar o container faz os execs fecha o container
+forlinux@dockerhost:~$ docker run --rm -ti --name temp --hostname temp ubuntu /bin/bash
+root@temp:/# cat etc/hosts
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.17.0.3	temp
+root@temp:/# exit
+exit
+forlinux@dockerhost:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+9617fddcf85c        ubuntu              "/bin/bash"         5 minutes ago       Up 5 minutes                            web1
+forlinux@dockerhost:~$ 
+
+=> mapear a maquina fisica para o container (aponta a 80 local)
+root@dockerhost:~# iptables -L DOCKER -n -t nat
+Chain DOCKER (2 references)
+target     prot opt source               destination         
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.17.0.3:80
+root@dockerhost:~# 
+
+=> mostra as rotas:
+root@dockerhost:~# iptables -S
+.
+.
+.
+-A DOCKER -d 172.17.0.3/32 ! -i docker0 -o docker0 -p tcp -m tcp --dport 80 -j ACCEPT
+.
+.
+
+=> acessa o container:
+root@dockerhost:~# docker exec -ti temp /bin/bash
+depois faz a instalacao:
+root@temp:/# apt-get clean && apt-get update && apt-get -y install nginx
+
+=> 
+
+
+
