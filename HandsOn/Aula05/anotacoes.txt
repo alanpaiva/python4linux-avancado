@@ -1,0 +1,74 @@
+Python e Jenkins..
+
+==== Jenkins ====
+Como funciona, para que serve, compreender os Jobs.
+
+=> Servidor de automacao escrito em java, tem o objetivo de automatizar coisas, nao somente deploys. Serve para testes de integracao com outros sistemas. Diferencial, sao os plugins (integracao com gitlab, github, entre outros).
+
+=> Possui interface web, pode utilizar via ssh tbm. Integracao SCMs (integradores de codigos)
+
+=> Por padrao vem configurado como anonimo
+
+ * Habilitar atualizacao automatica (ficara de tempos em tempos atualizando os status de jobs)
+ * W => status da job
+
+ * Construir um projeto de software free-style.
+
+ * Possui servidores Master e Slave.
+
+Criacao:
+    Nome: Teste
+ * Este Build eh parametrizado
+    Nome: TESTE
+    Valor padrao: Curso de Python
+ * Consultar periodicamente o SCM 
+    colocar os dados: * * * * *
+ * Build 
+    Executar Shell
+    colocar os dados: echo "Exibindo valor da variavel TESTE "$TESTE
+ SALVAR
+
+
+------
+forlinux@developer  ~ $ ssh forlinux@192.168.0.4
+forlinux@jenkins:~$ sudo su - jenkins
+sudo: unable to resolve host jenkins
+[sudo] password for forlinux: 
+Sorry, try again.
+[sudo] password for forlinux: 
+jenkins@jenkins:~$ 
+
+o principal arquivo eh: config.xml
+jenkins@jenkins:~$ ls -l
+total 120
+-rw-r--r--  1 jenkins jenkins 5757 Aug 22 18:24 config.xml
+-rw-r--r--  1 jenkins jenkins 1102 Mar  2 13:35 credentials.xml
+
+os diretorios
+jenkins@jenkins:~$  ls jobs/
+Deploy		     EmmaThomas      Terminus	    Terminus_webhook  vandy
+Download	     Salve	     Terminus-001   Teste	      WhatsUp
+Edmar_pega_novinhas  SouMaisWindows  TerminusEdmar  Testes	      WhatsUp1
+
+****************************************
+terminal ATOM - parecido com SublimeText
+****************************************
+
+forlinux@developer  / $ sudo pip install python-jenkins
+
+===========
+Integracoes
+===========
+
+Criar jobs:
+
+Integrar jobs:
+
+
+forlinux@developer  ~ $ sudo apt-get install python-lxml -y
+
+
+
+
+
+

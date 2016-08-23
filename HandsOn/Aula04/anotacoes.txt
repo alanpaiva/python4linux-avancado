@@ -142,6 +142,7 @@ depois faz a instalacao:
 root@temp:/# apt-get clean && apt-get update && apt-get -y install nginx
 
 => 
+service nginx start
 
 
 
