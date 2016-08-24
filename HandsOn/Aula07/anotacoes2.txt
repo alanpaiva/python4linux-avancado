@@ -1,0 +1,59 @@
+Rotinas de Deploy
+
+Integracao Continua - metodologia de desenvolvimento XP, fazer entregas de novas funcionalidades do sistema com mesma velocidade que eh desenvolvida. A linguagem Python facilita a integracao continua e tambem auxilia no deploy para qualquer tipo de aplicacao.
+
+Ferramentas Integracao Continua
+1- Sistema de controle de versao - Gitlab, Github
+2- Servidor de automacao - Jenkins
+3- Servidor de producao - Maquina Cloud (3ambientes - Dev,Hom,Prod)
+
+Fluxo
+1- Desenvolvimento (Dev)
+2- Controle do Codigo fonte (gitlab)
+3- Build (Jenkins)
+4- Testes (Jenkins)
+
+https://github.com/AlissonMMenezes/Terminus
+
+Procedimentos Deploy
+1- Dependencias SO
+2- Dependencias Python
+3- Instalando a aplicacao
+4- Executa aplicacao
+(ciclo se repete diversas vezes com atualizacoes constantes em dev)
+
+dev -> gitpush no Gitlab -> Webhook -> Jenkins
+
+Pyyaml
+sudo pip install pyyaml
+
+===================
+forlinux@developer  ~/4521-Python/HandsOn/Aula08 (master) $ python DeployTool.py -h
+usage: DeployTool.py [-h] [-i I]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -i I        Define arquivo de deploy
+forlinux@developer  ~/4521-Python/HandsOn/Aula08 (master) $ python DeployTool.py -i deploy.yml
+Arquivo de deploy selecionado:  deploy.yml
+
+
+========================
+http://172.17.0.16:6543/adm
+adm@adm.com.br
+adm
+forlinux@developer  ~/4521-Python/HandsOn/Aula08 (master) $ kill %1
+
+forlinux@dockerhost:~$ docker inspect Terminus
+
+=======================
+echo "mysql-server mysql-server/root_password password strangehat" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password strangehat" | sudo debconf-set-selections
+
+=======================
+
+
+
+
+
+
