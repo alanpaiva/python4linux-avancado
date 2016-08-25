@@ -1,0 +1,5 @@
+docker exec TerminusFuck apt-get clean
+docker exec TerminusFuck apt-get update
+docker exec TerminusFuck apt-get install git apache2 -y
+docker exec TerminusFuck bash -c 'rm -f /var/www/html/*'
+docker exec TerminusFuck bash -c 'git clone git@192.168.0.3:devops/Terminusfuck /var'

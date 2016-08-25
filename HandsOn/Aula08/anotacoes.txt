@@ -1,0 +1,8 @@
+DexterOPS
+Focado em realizar integracoes.
+    Criar repositorios gitlab..
+    Criar Job Jenkins..
+    Criar container docker..
+    Realizar deploy..
+
+
