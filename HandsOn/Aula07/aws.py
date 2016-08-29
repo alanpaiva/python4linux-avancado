@@ -37,14 +37,13 @@ def create_sg(name): #criando security groups
 
 def add_rule (sg.rule):
     sg = ec2.SecurityGroup(sg)
-    sg.authorize_ingress(rule)
+    sg.authorize_ingress(FromPort=80, ToPort=80, CidrIp="0.0.0.0/0", IpProtocol="tcp")
+    return sg
 
 def del_rule (sg.rule):
 
 #print add_rule("sg-cda21cb7")
-print add_rule("sg-cda21cb7",
-                FromPort=80,
-                ToPort=80,CidrIp="0.0.0.0/0",IpProtocol="tcp")
+print add_rule("sg-cda21cb7")
 print create_sg("Python-SG")
     
 
