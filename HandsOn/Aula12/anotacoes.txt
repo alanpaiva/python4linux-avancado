@@ -1,0 +1,77 @@
+=======================
+ultima aula ===========
+=======================
+
+Python e AWS com Boto3
+
+* Conceito Cloud computing;
+    Caracteristicas:    on-demand (criar as coisas na medida do que vc necessita);
+                        rapida elasticidade;
+                        mensurar o servico (em custos);
+                        broad network access;
+                        resource pooling;
+
+    Tipos:              privado;
+                        publico;
+                        hibrido;
+
+    Modelos:            SAAS - software (as a service);
+                        PAAS - plataforma (as a service);
+                        IAAS - infra (as a service);
+
+
+    AMI - gera nova instancia configurada;
+    EC2 - elastic cloud computing;
+    VPC - ambiente logico para maquinas privadas;
+    S3 - armazenamento de arquivos;
+    ELC - elastic cache (usa maincache/redis - comaprtilhar sessao);
+    RDS - banco de dados (postgree, maria, mysql..);
+        - cloud formation;
+        - lambda (muito bom p. executar APIs);
+        - cloud watch (sistema de monitoramento);
+
+Criar conta AWS (console.aws.amazon.com)
+
+
+* Conhecerr a amazon WebService;
+* Criar uma conta na AWS;
+* Acessar o AWS management console;
+* Contruir infra;
+* Configurar o EC2;
+
+============================
+forlinux@developer  ~ $ mkdir .aws/
+forlinux@developer  ~ $ nano config
+# colocar as instrucoes:    [default]
+                            region=us-east-1
+CTRL+O e CTRL+X
+forlinux@developer  ~ $ credentials
+# colocar as instrucoes:    aws_access_key_id = (criacao la na aws)
+                            aws_secret_accesss_key = (criacao la na aws tbm)
+CTRL+O e CTRL+X
+
+# criar instancia na AWS:
+1. choose an amazon Machine Image (AMI)
+    selecionar: UBUNTU Server 14.04
+2. choose an instanec Type:
+    selecionar: t2.micro(gratis)
+3. review
+    padrao conexao SSH
+    Select an existing key (responsekey)
+4. launch
+5. pegar o ID da instancia
+
+# security groups
+
+# install boto3
+plugin do modulo python para a AWS
+sudo pip install boto3 --upgrade
+
+Controlar AWS atrabes de um painel:
+configr.com/planos
+
+# documentacao boto3
+http://boto3.readthedocs.io/en/latest/reference/services/index.html
+
+
+
